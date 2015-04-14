@@ -1,7 +1,5 @@
 # docker container include golang runtime on Mac OS X
 ## Sync dir
-`coreos` dir is shared with vagrant CoreOS.  
-Deploy Go project source code at coreos, you can run your project at docker go runtime.
 ```sh
 $ vagrant up
 $ vagrant ssh
