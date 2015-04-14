@@ -6,6 +6,7 @@ Deploy Go project source code at coreos, you can run your project at docker go r
 $ vagrant up
 $ vagrant ssh
 core@core-01 ~ $ docker run -i -t -d -v /home/core/share:/tmp/share golang:1.4 /bin/bash
+```
 
 # Enable sync
 ```sh
