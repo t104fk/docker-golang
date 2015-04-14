@@ -1,44 +1,26 @@
 # docker container include golang runtime on Mac OS X
+## Sync dir
+`coreos` dir is shared with vagrant CoreOS.  
+Deploy Go project source code at coreos, you can run your project at docker go runtime.
 ```sh
 $ vagrant up
-```
-## Hang up
-```sh
-$ vagrant up
-...
-...
-==> core-01: Mounting NFS shared folders...
-# hang up
-```
-This is your mac doesn't know route to vagrant machine, so add route exec following command.
-
-```sh
-$ sudo route -nv add -net 172.17.8 -interface vboxnet0
-```
-
-## Permission denied
-Permission denied may happen when you execute `vagrant reload` after change vagrant ip.
-```sh
-
-==> core-01: Mounting NFS shared folders...
-The following SSH command responded with a non-zero exit status.
-Vagrant assumes that this means the command failed!
-
-mount -o 'nolock,vers=3,udp' 172.17.8.1:'/Users/username/docker-golang/coreos' /home/core/share
-
-Stdout from the command:
-
-
-
-Stderr from the command:
-
-mount.nfs: access denied by server while mounting 172.17.8.1:/Users/username/docker-golang/coreos
-```
-Remove coreos's `/etc/exports`
-```sh
 $ vagrant ssh
-core@core-01 ~ $ rm /etc/exports
-core@core-01 ~ $ exit
-$ vagrant reload
+core@core-01 ~ $ docker run -i -t -d -v /home/core/share:/tmp/share golang:1.4 /bin/bash
+
+# Enable sync
+```sh
+$ vagrant rsync-auto
 ```
 
+# Run Private Docker Registry
+```sh
+docker run --name registry \
+  -d \
+  -v /home/core/share/registry:/tmp/registry \
+  -e SETTINGS_FLAVOR=local \
+  -e SEARCH_BACKEND=sqlalchemy \
+  -e DOCKER_REGISTRY_CONFIG=/tmp/registry/config.yml \
+  -p 5000:5000 \
+  registry:latest \
+  docker-registry
+```
