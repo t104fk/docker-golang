@@ -1,4 +1,11 @@
 # docker container include golang runtime on Mac OS X
+## Requirement
+* VirtualBox
+* Vagrant
+
+## Environment
+* CoreOS(Vagrantfile is copied and modified a little.)
+
 ## Sync dir
 ```sh
 $ vagrant up
@@ -6,12 +13,12 @@ $ vagrant ssh
 core@core-01 ~ $ docker run -i -t -d -v /home/core/share:/tmp/share golang:1.4 /bin/bash
 ```
 
-# Enable sync
+## Enable sync
 ```sh
 $ vagrant rsync-auto
 ```
 
-# Run Private Docker Registry
+## Run Private Docker Registry
 ```sh
 docker run --name registry \
   -d \
