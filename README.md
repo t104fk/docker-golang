@@ -6,16 +6,14 @@
 ## Environment
 * CoreOS(Vagrantfile is copied and modified a little.)
 
-## Sync dir
-```sh
-$ vagrant up
-$ vagrant ssh
-core@core-01 ~ $ docker run -i -t -d -v /home/core/share:/tmp/share golang:1.4 /bin/bash
-```
-
-## Enable sync
+## Enable automatic rsync
 ```sh
 $ vagrant rsync-auto
+```
+
+## Mount volume to container
+```sh
+core@core-01 ~ $ docker run -i -t -d -v /home/core/share:/tmp/share golang:1.4 /bin/bash
 ```
 
 ## Run Private Docker Registry

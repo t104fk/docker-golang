@@ -8,5 +8,5 @@ local:
   <<: *common
   loglevel: debug
   storage: local
-  storage_path: /home/core/share/registry/storage
+  storage_path: /tmp/registry/storage
   
